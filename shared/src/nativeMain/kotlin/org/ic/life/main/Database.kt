@@ -1,13 +1,19 @@
-package org.ic.life.main.di
+package org.ic.life.main
 
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import kotlinx.cinterop.ExperimentalForeignApi
 import org.ic.life.main.data.database.AppDatabase
-import org.koin.core.module.Module
-import org.koin.dsl.module
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
+
+fun getDatabaseBuilder(): RoomDatabase.Builder<AppDatabase> {
+    val dbFilePath = documentDirectory() + "/my_room.db"
+    return Room.databaseBuilder<AppDatabase>(
+        name = dbFilePath,
+    )
+}
 
 @OptIn(ExperimentalForeignApi::class)
 private fun documentDirectory(): String {
@@ -19,13 +25,4 @@ private fun documentDirectory(): String {
         error = null,
     )
     return requireNotNull(documentDirectory?.path)
-}
-
-actual fun platformModule(): Module = module {
-    single<AppDatabase> {
-        val dbFile = documentDirectory() + "/app.db"
-        Room.databaseBuilder<AppDatabase>(
-            name = dbFile,
-        ).build()
-    }
 }
