@@ -6,15 +6,11 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.kmp.native.coroutines)
 }
 
 kotlin {
-    androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
-        }
-    }
+    androidTarget {}
 
     listOf(
         iosX64(),
@@ -37,12 +33,23 @@ kotlin {
             // Room
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
+
+            // View Model KMP
+            api(libs.kmm.viewmodel.core)
         }
 
         androidMain.dependencies {
             implementation(libs.koin.android)
         }
     }
+}
+
+kotlin.sourceSets.all {
+    languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
 }
 
 room {

@@ -25,6 +25,13 @@ ksp = "2.0.20-1.0.25"
 room = "2.7.0-alpha11"
 sqlite = "2.5.0-alpha11"
 
+# View Model KMP
+kmmViewmodelCore = "1.0.0-ALPHA-16"
+kmpNativeCoroutines = "1.0.0-ALPHA-22"
+
+# UI
+accompanistSystemuicontroller = "0.36.0"
+
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
@@ -50,6 +57,12 @@ room-runtime-android = { module = "androidx.room:room-runtime-android", version.
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
+# View Model KMP
+kmm-viewmodel-core = { module = "com.rickclephas.kmm:kmm-viewmodel-core", version.ref = "kmmViewmodelCore" }
+
+# UI
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -62,3 +75,6 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 # Room
 room = { id = "androidx.room", version.ref = "room" }
+
+# Native Coroutines
+kmp-native-coroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "kmpNativeCoroutines" }

@@ -17,7 +17,10 @@ fun initKoin(declaration: KoinAppDeclaration = {}) {
         declaration()
         modules(
             platformModule(),
-            repositoryModule
+            repositoryModule,
+            useCaseModule
         )
     }
 }
+
+fun initKoin() = initKoin {}

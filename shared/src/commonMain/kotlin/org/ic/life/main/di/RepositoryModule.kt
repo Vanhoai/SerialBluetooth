@@ -15,9 +15,9 @@ import org.koin.dsl.module
  * 1. Database (for caching data or save data locally, database module will register in platform module)
  * 2. Network (for fetching data from remote server)
  *
- * @see org.ic.life.main.data.database.AppDatabase
- * @see org.ic.life.main.data.repositories.ICRepositoryImpl
- * @see org.ic.life.main.data.repositories.MessageRepositoryImpl
+ * @see AppDatabase
+ * @see ICRepositoryImpl
+ * @see MessageRepositoryImpl
  */
 val repositoryModule = module {
     single<MessageRepository> {

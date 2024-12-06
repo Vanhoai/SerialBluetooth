@@ -11,13 +11,13 @@ import org.ic.life.main.core.configs.AppConfig
 @Dao
 interface MessageDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(message: MessageEntity)
+    suspend fun insert(message: MessageEntity): Long
 
     @Update
-    suspend fun update(message: MessageEntity)
+    suspend fun update(message: MessageEntity): Int
 
     @Delete
-    suspend fun delete(message: MessageEntity)
+    suspend fun delete(message: MessageEntity): Int
 
     @Query("SELECT * FROM ${AppConfig.MESSAGE_TABLE_NAME}")
     suspend fun finds(): List<MessageEntity>
