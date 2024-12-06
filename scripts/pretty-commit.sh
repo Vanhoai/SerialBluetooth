@@ -1,56 +1,36 @@
 #!/bin/sh
 
-# Function to get emoji based on commit type
-get_emoji() {
-    local commit_type=$1
-    case "$commit_type" in
-        "feat")
-            echo "✨" # Sparkles for new features
-            ;;
-        "fix")
-            echo "🐛" # Bug for fixes
-            ;;
-        "docs")
-            echo "📚" # Books for documentation
-            ;;
-        "style")
-            echo "🎨" # Palette for style changes
-            ;;
-        "refactor")
-            echo "🔧" # Wrench for refactoring
-            ;;
-        "test")
-            echo "🧪" # Test tube for tests
-            ;;
-        "chore")
-            echo "🤖" # Robot for chores
-            ;;
-        "perf")
-            echo "🚀" # Rocket for performance improvements
-            ;;
-        *)
-            echo "📝" # Memo for default
-            ;;
-    esac
+get_icon() {
+  case $1 in
+    "feat") echo "✨";;   # New feature
+    "fix") echo "🐛";;    # Bug fix
+    "refactor") echo "♻️";;  # Code refactor
+    "style") echo "🎨";;  # Code styling
+    "docs") echo "📝";;   # Documentation
+    "test") echo "✅";;   # Adding tests
+    "chore") echo "🔧";;  # Chores
+    *) echo "🌀";;        # Default icon
+  esac
 }
 
-# Check if commit message is provided
-if [ $# -eq 0 ]; then
-    echo "Usage: make commit -m 'type: message'"
-    exit 1
+COMMIT_MESSAGE="$*"
+
+if [[ "$COMMIT_MESSAGE" != *"-m "* ]]; then
+  echo "Error: Missing commit message. Use -m to specify the message."
+  exit 1
 fi
 
-# Extract commit type and message
-commit_type=$(echo "$1" | cut -d':' -f1)
-commit_message=$(echo "$1" | cut -d':' -f2- | xargs)
+TYPE=$(echo "$COMMIT_MESSAGE" | grep -oE "(-m\s+\"[a-zA-Z]+):" | cut -d'"' -f2 | cut -d':' -f1)
 
-# Get appropriate emoji
-emoji=$(get_emoji "$commit_type")
+if [[ -z "$TYPE" ]]; then
+  echo "Error: Could not extract a valid type from the commit message."
+  exit 1
+fi
 
-# Construct full commit message with emoji
-full_commit_message="$emoji $1"
+ICON=$(get_icon "$TYPE")
 
-# Perform git add and commit
-git commit -m "$full_commit_message"
+NEW_MESSAGE=$(echo "$COMMIT_MESSAGE" | sed -E "s/(-m\s+\"$TYPE:)/\1 $ICON/")
 
-echo "Committed with pretty format: $full_commit_message"
+echo "Running: git commit ${NEW_MESSAGE}"
+eval "git commit ${NEW_MESSAGE}"
+

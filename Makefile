@@ -1,2 +1,2 @@
 commit:
-    @sh pretty-commit.sh "$(m)"
+    ./scripts/pretty-commit.sh "$(m)"
