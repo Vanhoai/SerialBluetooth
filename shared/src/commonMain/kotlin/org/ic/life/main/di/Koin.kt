@@ -2,6 +2,7 @@ package org.ic.life.main.di
 
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
+import org.koin.dsl.module
 
 /**
  * Initialize Koin DI
@@ -16,11 +17,9 @@ fun initKoin(declaration: KoinAppDeclaration = {}) {
     startKoin {
         declaration()
         modules(
-            platformModule(),
             repositoryModule,
-            useCaseModule
+            useCaseModule,
+            platformModule()
         )
     }
 }
-
-fun initKoin() = initKoin {}
