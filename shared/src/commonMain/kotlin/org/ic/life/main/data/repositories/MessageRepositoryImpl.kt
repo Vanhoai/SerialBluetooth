@@ -1,20 +1,18 @@
 package org.ic.life.main.data.repositories
 
-import org.ic.life.main.data.database.message.MessageDao
 import org.ic.life.main.data.database.message.MessageEntity
+import org.ic.life.main.data.datasources.MessageLocalDataSource
 import org.ic.life.main.domain.repositories.MessageRepository
 
 class MessageRepositoryImpl(
-    private val messageDao: MessageDao
+    private val messageLocalDataSource: MessageLocalDataSource
 ) : MessageRepository {
 
     override suspend fun addMessage(messageEntity: MessageEntity): Boolean {
-        val response = messageDao.insert(messageEntity)
-        return response > 0L
+        return messageLocalDataSource.addMessage(messageEntity)
     }
 
     override suspend fun removeMessage(messageEntity: MessageEntity): Boolean {
-        val response = messageDao.delete(messageEntity)
-        return response > 0
+        return messageLocalDataSource.removeMessage(messageEntity)
     }
 }

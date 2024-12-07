@@ -1,6 +1,5 @@
 package org.ic.life.main.core.design
 
-
 import androidx.annotation.RequiresPermission
 import androidx.compose.material.Colors
 import androidx.compose.material.LocalContentColor

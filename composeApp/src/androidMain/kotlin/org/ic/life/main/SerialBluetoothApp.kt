@@ -14,24 +14,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.ic.life.main.core.design.SerialBluetoothAppTheme
 import org.ic.life.main.data.database.message.MessageEntity
-import org.ic.life.main.features.MainViewModel
+import org.ic.life.main.presentation.views.swipe.SwipeViewModel
 import org.ic.life.main.presentation.widgets.AppScaffold
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
 import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
-@OptIn(ExperimentalUuidApi::class)
 @Composable
 @Preview
 fun SerialBluetoothApp() {
     SerialBluetoothAppTheme {
 
-        val viewModel = koinViewModel<MainViewModel>()
+        val viewModel = koinViewModel<SwipeViewModel>()
         val mainUiState by viewModel.uiState.collectAsStateWithLifecycle()
 
         LaunchedEffect(mainUiState.messages) {
-            Log.d("MainActivity", "Messages: ${mainUiState.messages}")
+            Log.d("SerialBluetoothApp", "Messages: ${mainUiState.messages}")
         }
 
         AppScaffold { paddingValues ->
@@ -44,10 +42,10 @@ fun SerialBluetoothApp() {
             ) {
                 Button(onClick = {
                     val newMessage = MessageEntity(
-                        uuid = Uuid.random(),
+                        uuid = 0L,
                         message = "Hello, World!",
-                        author = Uuid.random(),
-                        channel = Uuid.random(),
+                        author = 0L,
+                        channel = 0L,
                     )
 
                     viewModel.addMessage(newMessage)
@@ -60,6 +58,7 @@ fun SerialBluetoothApp() {
 
                 Button(onClick = {
                     val topMessage = mainUiState.messages.firstOrNull()
+                    Log.d("SerialBluetoothApp", "Top Message: $topMessage")
                     if (topMessage != null) {
                         viewModel.removeMessage(topMessage)
                     }

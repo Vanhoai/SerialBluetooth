@@ -20,5 +20,8 @@ import org.koin.dsl.module
  * @see org.ic.life.main.data.database.AppDatabase
  */
 actual fun platformModule(): Module = module {
-    single<AppDatabase> { NativeDatabase.getDatabase() }
+    single<AppDatabase> {
+        val builder = NativeDatabase.getDatabaseBuilder()
+        AppDatabase.buildRoomDatabase(builder)
+    }
 }

@@ -11,13 +11,13 @@ import org.ic.life.main.core.configs.AppConfig
 @Dao
 interface ICDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(ic: ICEntity)
+    suspend fun insert(ic: ICEntity): Long
 
     @Update
-    suspend fun update(ic: ICEntity)
+    suspend fun update(ic: ICEntity): Int
 
     @Delete
-    suspend fun delete(ic: ICEntity)
+    suspend fun delete(ic: ICEntity): Int
 
     @Query("SELECT * FROM ${AppConfig.IC_TABLE_NAME}")
     suspend fun finds(): List<ICEntity>

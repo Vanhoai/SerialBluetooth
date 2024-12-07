@@ -1,5 +1,6 @@
 package org.ic.life.main.di
 
+import androidx.room.RoomDatabase
 import org.ic.life.main.data.database.AppDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.Module
@@ -21,5 +22,8 @@ import org.ic.life.main.core.AndroidDatabase
  * @see org.ic.life.main.data.database.AppDatabase
  */
 actual fun platformModule(): Module = module {
-    single<AppDatabase> { AndroidDatabase.getDatabase(androidContext()) }
+    single<AppDatabase> {
+        val builder = AndroidDatabase.getDatabaseBuilder(get())
+        AppDatabase.buildRoomDatabase(builder)
+    }
 }

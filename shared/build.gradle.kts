@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
-    alias(libs.plugins.kmp.native.coroutines)
 }
 
 kotlin {
@@ -25,21 +24,17 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            // put your Multiplatform dependencies here
-
             // Koin
             implementation(libs.koin.core)
 
             // Room
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
-
-            // View Model KMP
-            api(libs.kmm.viewmodel.core)
         }
 
         androidMain.dependencies {
             implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
         }
     }
 }
@@ -54,6 +49,13 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+dependencies {
+    add("kspAndroid", libs.room.compiler)
+    add("kspIosX64", libs.room.compiler)
+    add("kspIosArm64", libs.room.compiler)
+    add("kspIosSimulatorArm64", libs.room.compiler)
 }
 
 android {

@@ -21,10 +21,7 @@ class AndroidDatabase {
 
         fun getDatabase(ctx: Context): AppDatabase {
             val dbFile = ctx.getDatabasePath(AppConfig.DATABASE_FILE_NAME)
-            return Room.databaseBuilder<AppDatabase>(
-                context = ctx,
-                name = dbFile.absolutePath
-            )
+            return Room.databaseBuilder<AppDatabase>(ctx, dbFile.absolutePath)
                 .setDriver(BundledSQLiteDriver())
                 .setQueryCoroutineContext(Dispatchers.IO)
                 .build()

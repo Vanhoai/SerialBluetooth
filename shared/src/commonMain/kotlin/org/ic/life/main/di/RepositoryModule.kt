@@ -5,6 +5,8 @@ import org.ic.life.main.data.repositories.ICRepositoryImpl
 import org.ic.life.main.data.repositories.MessageRepositoryImpl
 import org.ic.life.main.domain.repositories.ICRepository
 import org.ic.life.main.domain.repositories.MessageRepository
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 /**
@@ -20,13 +22,6 @@ import org.koin.dsl.module
  * @see MessageRepositoryImpl
  */
 val repositoryModule = module {
-    single<MessageRepository> {
-        val appDatabase = get<AppDatabase>()
-        MessageRepositoryImpl(appDatabase.messageDao())
-    }
-
-    single<ICRepository> {
-        val appDatabase = get<AppDatabase>()
-        ICRepositoryImpl(appDatabase.icDao())
-    }
+    singleOf(::MessageRepositoryImpl).bind(MessageRepository::class)
+    singleOf(::ICRepositoryImpl).bind(ICRepository::class)
 }
