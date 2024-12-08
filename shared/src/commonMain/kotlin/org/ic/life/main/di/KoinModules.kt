@@ -22,3 +22,13 @@ fun initKoin(declaration: KoinAppDeclaration = {}) {
         )
     }
 }
+
+/**
+ * Initialize Koin DI for ios platform
+ *
+ *
+ * This function will called for init koin in ios platform. When this function called, it will
+ * call [initKoin] function with platform module
+ */
+fun initKoin() = initKoin {}
+

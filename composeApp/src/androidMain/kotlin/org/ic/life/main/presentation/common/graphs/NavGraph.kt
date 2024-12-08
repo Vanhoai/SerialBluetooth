@@ -14,16 +14,14 @@ fun NavGraph() {
 
     NavHost(
         navController = navController,
-        startDestination = NavRoute.SWIPE.path
+        startDestination = NavRoute.STARTED.path,
     ) {
-
         composable(NavRoute.STARTED.path) {
-            StartedView()
+            StartedView(navController)
         }
 
         composable(NavRoute.SWIPE.path) {
-            SwipeView()
+            SwipeView(navController)
         }
-
     }
 }
