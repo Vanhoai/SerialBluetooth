@@ -5,7 +5,6 @@ import androidx.compose.material.Colors
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Typography
-import androidx.compose.material.darkColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -38,25 +37,18 @@ fun SerialBluetoothAppTheme(
     }
     colorPalette.update(colors)
 
-//    CompositionLocalProvider(
-//        LocalSpacing provides Spacing,
-//        LocalColors provides colorPalette,
-//        LocalTypography provides Typography
-//    ) {
-//        MaterialTheme(
-//            typography = debugTypography(),
-//            shapes = Shapes,
-//            colors = debugColors(true),
-//            content = content
-//        )
-//    }
-
-    MaterialTheme(
-        typography = MaterialTheme.typography.copy(),
-        shapes = Shapes,
-        colors = MaterialTheme.colors.copy(),
-        content = content
-    )
+    CompositionLocalProvider(
+        LocalSpacing provides Spacing,
+        LocalColors provides colorPalette,
+        LocalTypography provides Typography
+    ) {
+        MaterialTheme(
+            typography = MaterialTheme.typography.copy(),
+            shapes = Shapes,
+            colors = MaterialTheme.colors.copy(),
+            content = content
+        )
+    }
 }
 
 object AppTheme {
