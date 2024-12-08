@@ -25,7 +25,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
-
+            implementation(libs.androidx.navigation.compose)
             implementation(libs.koin.androidx.compose)
             implementation(libs.accompanist.systemuicontroller)
         }

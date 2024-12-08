@@ -55,7 +55,7 @@ val serialBluetoothColorPalette = SerialBluetoothColors(
 fun SerialBluetoothAppTheme(
     content: @Composable () -> Unit
 ) {
-    val systemUiController = rememberSystemUiController()
+    @Suppress("DEPRECATION") val systemUiController = rememberSystemUiController()
 
     val colors = serialBluetoothColorPalette
 

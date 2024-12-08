@@ -7,7 +7,7 @@ import org.ic.life.main.core.configs.AppConfig
 @Entity(tableName = AppConfig.IC_TABLE_NAME)
 data class ICEntity(
     @PrimaryKey(autoGenerate = true)
-    val uuid: Long,
+    val uuid: Int,
     val name: String,
     val address: String,
 )
