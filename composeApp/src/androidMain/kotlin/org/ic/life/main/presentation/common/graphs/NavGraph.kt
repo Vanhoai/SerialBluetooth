@@ -1,6 +1,7 @@
 package org.ic.life.main.presentation.common.graphs
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -14,7 +15,7 @@ fun NavGraph() {
 
     NavHost(
         navController = navController,
-        startDestination = NavRoute.STARTED.path,
+        startDestination = NavRoute.SWIPE.path,
     ) {
         composable(NavRoute.STARTED.path) {
             StartedView(navController)
