@@ -10,6 +10,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+
 import org.ic.life.main.presentation.views.swipe.devices.DevicesView
 import org.ic.life.main.presentation.views.swipe.settings.SettingsView
 import org.ic.life.main.presentation.views.swipe.terminal.TerminalView
@@ -19,7 +20,6 @@ fun SwipeBottomBar(
     tab: SwipeRoute,
     setTab: (SwipeRoute) -> Unit
 ) {
-
     BottomNavigation {
         val bottomNavItems = listOf(
             BottomNavItem.Terminal,
