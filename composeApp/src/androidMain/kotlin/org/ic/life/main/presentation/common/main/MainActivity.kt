@@ -9,6 +9,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -17,7 +20,7 @@ import org.ic.life.main.SerialBluetoothApp
 class MainActivity : ComponentActivity() {
 
     private var keepOnScreenCondition = true
-    fun runSplashScreen() {
+    private fun runSplashScreen() {
         lifecycleScope.launch {
             delay(3000)
             keepOnScreenCondition = false
@@ -54,8 +57,13 @@ class MainActivity : ComponentActivity() {
                 opacity.start()
             }
         }
-
         enableEdgeToEdge()
+        val insetsController = WindowCompat.getInsetsController(window, window.decorView)
+        insetsController.apply {
+            hide(WindowInsetsCompat.Type.statusBars())
+            hide(WindowInsetsCompat.Type.navigationBars())
+            systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
         setContent {
             SerialBluetoothApp()
         }

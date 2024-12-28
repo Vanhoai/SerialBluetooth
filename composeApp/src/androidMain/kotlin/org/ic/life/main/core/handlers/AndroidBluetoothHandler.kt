@@ -30,4 +30,5 @@ class AndroidBluetoothHandler(private val context: Context) : BluetoothHandler {
     override fun isBluetoothEnabled(): Boolean {
         return isBluetoothEnabled
     }
+
 }
